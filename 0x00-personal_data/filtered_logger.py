@@ -27,7 +27,7 @@ class RedactingFormatter(logging.Formatter):
                             mes, RedactingFormatter.SEPARATOR)
 
 
-def filter_datum(fields: list[str, str], redaction: str, message: str,
+def filter_datum(fields: list[str], redaction: str, message: str,
                  separator: str) -> str:
     """returns the log message obfuscated:"""
     pattern = f"({'|'.join(map(re.escape, fields))})=[^{separator}]*"
