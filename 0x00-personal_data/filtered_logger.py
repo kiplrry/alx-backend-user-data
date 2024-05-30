@@ -2,6 +2,7 @@
 """the main file"""
 import re
 import logging
+from typing import List
 
 
 # PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
@@ -27,9 +28,21 @@ class RedactingFormatter(logging.Formatter):
                             mes, RedactingFormatter.SEPARATOR)
 
 
-def filter_datum(fields: list[str], redaction: str, message: str,
-                 separator: str) -> str:
-    """returns the log message obfuscated:"""
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, separator: str) -> str:
+    """
+    Replaces sensitive information in a message with a redacted value
+    based on the list of fields to redact
+
+    Args:
+        fields: list of fields to redact
+        redaction: the value to use for redaction
+        message: the string message to filter
+        separator: the separator to use between fields
+
+    Returns:
+        The filtered string message with redacted values
+    """
     for f in fields:
         message = re.sub(f'{f}=.*?{separator}',
                          f'{f}={redaction}{separator}', message)
