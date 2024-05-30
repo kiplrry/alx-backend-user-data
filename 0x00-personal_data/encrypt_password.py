@@ -17,11 +17,19 @@ def hash_password(password: str) -> bytes:
 
 def is_valid(hash_password: bytes, password: str) -> bool:
     """
-    expects 2 arguments and returns a boolean.
+        Validates whether the provided password matches the hashed password.
 
-    Arguments:
+        Args:
+                hashed_password (bytes): A byte string representing
+                the salted, hashed password.
+                password (str): A string containing the plain text
+                password to be validated.
 
-        hashed_password: bytes type
-        password: string type
+        Returns:
+                bool: True if the provided password matches the hashed
+                password, False otherwise.
     """
-    return bcrypt.checkpw(password.encode(), hash_password)
+    passw = password.encode()
+    if bcrypt.checkpw(passw, hash_password):
+        return True
+    return False
