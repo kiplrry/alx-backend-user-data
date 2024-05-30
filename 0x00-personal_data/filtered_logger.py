@@ -96,14 +96,21 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
 
 
 def main():
+    """Main function"""
     conn = get_db()
     conn.connect()
     cursor = conn.cursor()
     cursor.execute('SELECT * from users')
-    users = cursor.fetchall()
+    field_names = [i[0] for i in cursor.description]
+
     logger = get_logger()
-    for user in users:
-        logger.info(user)
+
+    for row in cursor:
+        str_row = ''.join(f'{f}={str(r)}; ' for r, f in zip(row, field_names))
+        logger.info(str_row.strip())
+
+    cursor.close()
+    conn.close()
 
 
 if __name__ == '__main__':
