@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Regex-ing Module"""
-
+"""the main file"""
 import re
 import logging
 
 
-PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
+# PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 
 class RedactingFormatter(logging.Formatter):
@@ -17,6 +16,7 @@ class RedactingFormatter(logging.Formatter):
     SEPARATOR = ";"
 
     def __init__(self, fields):
+        """init the class"""
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
 
@@ -35,11 +35,10 @@ def filter_datum(fields: list[str], redaction: str, message: str,
                          f'{f}={redaction}{separator}', message)
     return message
 
-
-def get_logger() -> logging.Logger:
-    logger = logging.getLogger("user_data")
-    logger.setLevel = logging.INFO
-    stream = logging.StreamHandler(format=RedactingFormatter)
-    logger.addHandler(stream)
-    logger.propagate = False
-    return logger
+# def get_logger() -> logging.Logger:
+#     logger = logging.getLogger("user_data")
+#     logger.setLevel = logging.INFO
+#     stream = logging.StreamHandler(format=RedactingFormatter)
+#     logger.addHandler(stream)
+#     logger.propagate = False
+#     return logger
