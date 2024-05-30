@@ -76,25 +76,6 @@ def get_logger() -> logging.Logger:
     return logger
 
 
-# def get_db() -> mysql.connector.connection.MySQLConnection:
-#     """
-#     Returns a MySQLConnection object for accessing Personal Data database
-
-#     Returns:
-#         A MySQLConnection object using connection details from
-#         environment variables
-#     """
-#     username = os.environ.get('PERSONAL_DATA_DB_USERNAME', 'root')
-#     passw = os.environ.get('PERSONAL_DATA_DB_PASSWORD', '')
-#     host = os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost')
-#     db = os.environ.get('PERSONAL_DATA_DB_NAME')
-#     conn = mysql.connector.connection.MySQLConnection(user=username,
-#                                                       database=db,
-#                                                       password=passw,
-#                                                       host=host)
-#     return conn
-
-
 def get_db() -> mysql.connector.connection.MySQLConnection:
     """
     Returns a MySQLConnection object for accessing Personal Data database
@@ -103,13 +84,27 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         A MySQLConnection object using connection details from
         environment variables
     """
-    username = environ.get("PERSONAL_DATA_DB_USERNAME", "root")
-    password = environ.get("PERSONAL_DATA_DB_PASSWORD", "")
-    host = environ.get("PERSONAL_DATA_DB_HOST", "localhost")
-    db_name = environ.get("PERSONAL_DATA_DB_NAME")
+    username = os.environ.get('PERSONAL_DATA_DB_USERNAME', 'root')
+    passw = os.environ.get('PERSONAL_DATA_DB_PASSWORD', '')
+    host = os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost')
+    db = os.environ.get('PERSONAL_DATA_DB_NAME')
+    conn = mysql.connector.connection.MySQLConnection(user=username,
+                                                      database=db,
+                                                      password=passw,
+                                                      host=host)
+    return conn
 
-    cnx = mysql.connector.connection.MySQLConnection(user=username,
-                                                     password=password,
-                                                     host=host,
-                                                     database=db_name)
-    return cnx
+
+def main():
+    conn = get_db()
+    conn.connect()
+    cursor = conn.cursor()
+    cursor.execute('SELECT * from users')
+    users = cursor.fetchall()
+    logger = get_logger()
+    for user in users:
+        logger.info(user)
+
+
+if __name__ == '__main__':
+    main()
