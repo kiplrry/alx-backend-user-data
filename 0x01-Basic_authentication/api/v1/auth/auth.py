@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Authorization module
+Authorization module implementation
 """
 from flask import Request, request
 from typing import List, TypeVar
-
+User = TypeVar('User')
 
 class Auth:
     """Authorization Module
