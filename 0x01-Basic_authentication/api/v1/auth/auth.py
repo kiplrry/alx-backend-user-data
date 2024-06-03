@@ -35,7 +35,7 @@ class Auth:
 
         return True
 
-    def authorization_header(self, request = None) -> str:
+    def authorization_header(self, request=None) -> str:
         """Authorization header check
 
         :param request: request , defaults to None
@@ -48,7 +48,7 @@ class Auth:
             return None
         return request.authorization
 
-    def current_user(self, request = None) -> TypeVar('User'):
+    def current_user(self, request=None) -> TypeVar('User'):
         """return current user
 
         :return: current user
