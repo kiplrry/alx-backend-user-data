@@ -36,11 +36,11 @@ def unauth() -> str:
     abort(401)
 
 
-# @app_views.route('/forbidden')
-# def forb() -> str:
-#     """GET api/v1/forbidden
+@app_views.route('/forbidden', strict_slashes=False)
+def forb() -> str:
+    """GET api/v1/forbidden
 
-#     :return: 403
-#     :rtype: str
-#     """
-#     abort(403)
+    :return: 403
+    :rtype: str
+    """
+    abort(403)
