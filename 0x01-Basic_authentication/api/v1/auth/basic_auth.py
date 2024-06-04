@@ -34,6 +34,13 @@ class BasicAuth(Auth):
 
     def decode_base64_authorization_header(self,
                                            base64_authorization_header: str) -> str:
+        """Decode basic auth
+
+        :param base64_authorization_header: base64 str
+        :type base64_authorization_header: str
+        :return: None or decoded str
+        :rtype: str
+        """
         ba = base64_authorization_header
         if ba is None or not isinstance(ba, str):
             return None
