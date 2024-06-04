@@ -3,7 +3,7 @@
 Basic auth implementation
 """
 from api.v1.auth.auth import Auth
-
+import base64
 
 class BasicAuth(Auth):
     """BasicAuth
@@ -31,3 +31,14 @@ class BasicAuth(Auth):
             return None
 
         return arrs[1]
+
+    def decode_base64_authorization_header(self,
+                                           base64_authorization_header: str) -> str:
+        ba = base64_authorization_header
+        if ba is None or not isinstance(ba, str):
+            return None
+        try:
+            decode = base64.decodebytes(ba.encode())
+            return decode.decode()
+        except:
+            return None
