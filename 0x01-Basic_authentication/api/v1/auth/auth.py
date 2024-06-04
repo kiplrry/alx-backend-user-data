@@ -21,6 +21,9 @@ class Auth:
         :return: bool
         :rtype: bool
         """
+        if not isinstance(path, str) or\
+                not isinstance(excluded_paths, list):
+            raise TypeError
         if path is None or not excluded_paths:
             return True
 
