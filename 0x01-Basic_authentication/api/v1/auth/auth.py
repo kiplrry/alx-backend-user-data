@@ -48,7 +48,7 @@ class Auth:
             return None
         return request.authorization
 
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request=None) -> User:
         """return current user
 
         :return: current user
