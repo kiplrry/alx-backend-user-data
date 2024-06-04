@@ -11,7 +11,8 @@ class BasicAuth(Auth):
     :param Auth: An implementatin of Basic Authentication
     :type Auth: Auth
     """
-    def extract_base64_authorization_header(self, authorization_header: str) -> str:
+    def extract_base64_authorization_header(self,
+                                            authorization_header: str) -> str:
         """Extrac Basic auth
 
         :param authorization_header: Auth header
@@ -25,7 +26,7 @@ class BasicAuth(Auth):
         arrs = authorization_header.split(' ')
         if len(arrs) != 2:
             return None
-        
+
         if arrs[0] != 'Basic':
             return None
 
