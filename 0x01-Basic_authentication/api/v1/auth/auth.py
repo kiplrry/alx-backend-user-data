@@ -24,7 +24,7 @@ class Auth:
         if not isinstance(path, str) or\
                 not isinstance(excluded_paths, list):
             return True
-        
+
         if path is None or not len(excluded_paths)\
                 or excluded_paths is None:
             return True
