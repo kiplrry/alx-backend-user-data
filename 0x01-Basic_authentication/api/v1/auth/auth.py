@@ -27,8 +27,6 @@ class Auth:
         path_slashed = path if path.endswith('/') \
             else path + '/'
         path = path_slashed.removesuffix('/')
-
-        print(path, path_slashed)
         if path_slashed in excluded_paths \
                 or path in excluded_paths:
             return False
