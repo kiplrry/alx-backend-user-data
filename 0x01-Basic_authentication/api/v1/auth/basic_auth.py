@@ -5,6 +5,7 @@ Basic auth implementation
 from api.v1.auth.auth import Auth
 import base64
 
+
 class BasicAuth(Auth):
     """BasicAuth
 
@@ -33,7 +34,8 @@ class BasicAuth(Auth):
         return arrs[1]
 
     def decode_base64_authorization_header(self,
-                                           base64_authorization_header: str) -> str:
+                                           base64_authorization_header: str
+                                           ) -> str:
         """Decode basic auth
 
         :param base64_authorization_header: base64 str
@@ -47,5 +49,5 @@ class BasicAuth(Auth):
         try:
             decode = base64.decodebytes(ba.encode())
             return decode.decode()
-        except:
+        except UnicodeDecodeError:
             return None
