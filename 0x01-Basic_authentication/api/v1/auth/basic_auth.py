@@ -49,5 +49,5 @@ class BasicAuth(Auth):
         try:
             decode = base64.decodebytes(ba.encode())
             return decode.decode()
-        except UnicodeDecodeError:
+        except BaseException:
             return None
