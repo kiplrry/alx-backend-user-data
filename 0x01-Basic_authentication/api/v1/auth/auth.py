@@ -47,10 +47,9 @@ class Auth:
         :return: authorization header or none
         :rtype: str
         """
-        if request is None or \
-                request.authorization is None:
+        if request is None:
             return None
-        return request.authorization
+        return request.headers.get("Authorization")
 
     def current_user(self, request=None) -> TypeVar('User'):
         """return current user
