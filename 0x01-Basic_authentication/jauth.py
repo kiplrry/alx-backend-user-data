@@ -21,7 +21,20 @@ class Auth:
         :return: bool
         :rtype: bool
         """
-        return False
+        if not isinstance(path, str) or\
+                not isinstance(excluded_paths, list):
+            raise TypeError
+        if path is None or not excluded_paths:
+            return True
+
+        path_slashed = path if path.endswith('/') \
+            else path + '/'
+        path = path_slashed.removesuffix('/')
+        if path_slashed in excluded_paths \
+                or path in excluded_paths:
+            return False
+
+        return True
 
     def authorization_header(self, request=None) -> str:
         """Authorization header check
@@ -31,9 +44,12 @@ class Auth:
         :return: authorization header or none
         :rtype: str
         """
-        return None
+        if request is None or \
+                request.authorization is None:
+            return None
+        return request.authorization
 
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request=None) -> User:
         """return current user
 
         :return: current user
