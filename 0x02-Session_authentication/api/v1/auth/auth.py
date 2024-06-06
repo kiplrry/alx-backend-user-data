@@ -57,4 +57,4 @@ class Auth:
         :return: current user
         :rtype: _type_
         """
-        return request.current_user or None
+        return getattr(request, 'current_user', None)
