@@ -4,6 +4,7 @@ Authorization module implementation
 """
 from flask import request
 from typing import List, TypeVar
+from os import getenv
 User = TypeVar('User')
 
 
@@ -67,7 +68,6 @@ class Auth:
         """
         if request is None:
             return None
-
-        cookie = request.cookies.get('_my_session_id', None)
-
+        name = getenv('SESSION_NAME')
+        cookie = request.cookies.get(name, None)
         return cookie
