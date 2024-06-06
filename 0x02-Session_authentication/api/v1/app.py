@@ -33,10 +33,12 @@ def authing():
         return
     if not auth.require_auth(request.path,
                              ['/api/v1/status/', '/api/v1/unauthorized/',
-                              '/api/v1/forbidden/']):
+                              '/api/v1/forbidden/',
+                              "/api/v1/auth_session/login/"]):
         return
     auth_header = auth.authorization_header(request)
-    if auth_header is None:
+    sess_cookie = auth.session_cookie(request)
+    if auth_header is None and sess_cookie is None:
         abort(401)
     current_user = auth.current_user(request)
     if current_user is None:
