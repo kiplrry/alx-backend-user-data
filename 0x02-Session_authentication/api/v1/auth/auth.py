@@ -70,6 +70,6 @@ class Auth:
             return None
         name = getenv('SESSION_NAME')
         cookie = request.cookies.get(name, None)
-        if len(cookie) < 1:
-            return None
+        # if len(cookie) < 1:
+        #     return None
         return cookie
