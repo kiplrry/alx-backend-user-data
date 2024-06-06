@@ -58,3 +58,16 @@ class Auth:
         :rtype: _type_
         """
         return getattr(request, 'current_user', None)
+
+    def session_cookie(self, request=None):
+        """Returns a cookie from request
+
+        :param request: Request, defaults to None
+        :type request: Request, optional
+        """
+        if request is None:
+            return None
+
+        cookie = request.cookies.get('_my_session_id', None)
+
+        return cookie
