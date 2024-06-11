@@ -10,6 +10,7 @@ from user import Base, User
 
 VALID = ['hashed_password', 'email', 'session_id',
          'reset_token', 'id']
+
 class DB:
     """DB class
     """
