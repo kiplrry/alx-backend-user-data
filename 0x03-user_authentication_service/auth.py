@@ -24,13 +24,13 @@ class Auth:
 
     def register_user(self, email: str, password: str) -> User:
         """Registers a user"""
-        if email is None or not isinstance(email, str) or\
-                password is None or not isinstance(password, str):
-            return
+        # if email is None or not isinstance(email, str) or\
+        #         password is None or not isinstance(password, str):
+        #     return
         try:
             user = self._db.find_user_by(email=email)
             raise ValueError(f'User {email} already exists')
         except NoResultFound:
             hashed = _hash_password(password)
-        user = self._db.add_user(email, hashed)
-        return user
+            user = self._db.add_user(email, hashed)
+            return user
