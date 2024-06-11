@@ -49,15 +49,15 @@ class DB:
             raise NoResultFound
         return user
 
-    # def update_user(self, user_id: int, **kwargs):
-    #     """ updates a user """
-    #     if user_id is None or not isinstance(user_id, int):
-    #         return
-    #     user = self.find_user_by(id=user_id)
-    #     for k, v in kwargs.items():
-    #         if k not in ['hashed_password',
-    #                      'email', 'session_id',
-    #                      'reset_token']:
-    #             raise ValueError
-    #         setattr(user, k, v)
-    #     self._session.commit()
+    def update_user(self, user_id: int, **kwargs):
+        """ updates a user """
+        if user_id is None or not isinstance(user_id, int):
+            return
+        user = self.find_user_by(id=user_id)
+        for k, v in kwargs.items():
+            if k not in ['hashed_password',
+                         'email', 'session_id',
+                         'reset_token']:
+                raise ValueError
+            setattr(user, k, v)
+        self._session.commit()
