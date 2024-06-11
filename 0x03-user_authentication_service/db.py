@@ -34,10 +34,9 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """saves user to the db
         """
-        # if email is None or not isinstance(email, str)\
-        #         or hashed_password is None or\
-        #         not isinstance(hashed_password, str):
-        #     return
+        if email is None or not isinstance(email, str)\
+                or hashed_password is None:
+            return None
         user = User(email=email, hashed_password=hashed_password)
         self._session.add(user)
         self._session.commit()
