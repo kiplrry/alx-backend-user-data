@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
-"""user model implementaion with sqlalchemy
-"""
+"""User model"""
+
 from typing import Optional
-from sqlalchemy.orm import declarative_base
-from sqlalchemy import String, Integer, Column
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
 
 class User(Base):
-    """User class
-        impl
-    """
+    """User class"""
     __tablename__ = 'users'
 
     id: int = Column(Integer, primary_key=True)
@@ -20,9 +18,6 @@ class User(Base):
     session_id: Optional[str] = Column(String(250), nullable=True)
     reset_token: Optional[str] = Column(String(250), nullable=True)
 
-    # def __init__(self, email, hashed_password, session_id=None,
-    #              reset_token=None):
-    #     self.email = email
-    #     self.hashed_password = hashed_password
-    #     self.session_id = session_id
-    #     self.reset_token = reset_token
+    def __repr__(self) -> str:
+        """Returns a string representation of the User object"""
+        return f"User: id={self.id}"
