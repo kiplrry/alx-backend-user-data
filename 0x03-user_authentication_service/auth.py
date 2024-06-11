@@ -9,6 +9,8 @@ import bcrypt
 
 def _hash_password(password: str) -> bytes:
     """hashes a password"""
+    if password is None or not isinstance(password, str):
+        return
     hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
     return hashed
 
