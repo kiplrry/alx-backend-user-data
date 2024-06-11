@@ -51,8 +51,6 @@ class DB:
 
     def update_user(self, user_id: int, **kwargs):
         """ updates a user """
-        if user_id is None:
-            return
         user = self.find_user_by(id=user_id)
         for k, v in kwargs.items():
             if k not in ['hashed_password',
