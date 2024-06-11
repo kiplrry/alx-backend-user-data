@@ -19,9 +19,9 @@ class User(Base):
     session_id = Column(String(250))
     reset_token = Column(String(250))
 
-    def __init__(self, email, hashed_password, session_id=None,
-                 reset_token=None):
-        self.email = email
-        self.hashed_password = hashed_password
-        self.session_id = session_id
-        self.reset_token = reset_token
+    # def __init__(self, email, hashed_password, session_id=None,
+    #              reset_token=None):
+    #     self.email = email
+    #     self.hashed_password = hashed_password
+    #     self.session_id = session_id
+    #     self.reset_token = reset_token
