@@ -57,7 +57,7 @@ class DB:
         for k, v in kwargs.items():
             if k not in ['hashed_password',
                          'email', 'session_id',
-                         'reset_token']:
+                         'reset_token', 'id']:
                 raise ValueError
             setattr(user, k, v)
         self._session.commit()
