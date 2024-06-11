@@ -8,7 +8,8 @@ from sqlalchemy.orm.exc import NoResultFound
 import bcrypt
 from user import Base, User
 
-
+VALID = ['hashed_password', 'email', 'session_id',
+         'reset_token', 'id']
 class DB:
     """DB class
     """
@@ -49,13 +50,11 @@ class DB:
             raise NoResultFound
         return user
 
-    def update_user(self, user_id: int, **kwargs):
+    def update_user(self, user_id: int, **kwargs) -> None:
         """ updates a user """
         user = self.find_user_by(id=user_id)
         for k, v in kwargs.items():
-            if k not in ['hashed_password',
-                         'email', 'session_id',
-                         'reset_token', 'id']:
+            if k not in VALID:
                 raise ValueError
             setattr(user, k, v)
         self._session.commit()
