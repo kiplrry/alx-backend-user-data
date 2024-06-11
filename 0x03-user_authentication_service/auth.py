@@ -9,7 +9,7 @@ User = TypeVar('User')
 
 def _hash_password(password: str) -> bytes:
     """hashes a password"""
-    hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+    hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
     return hashed
 
 
