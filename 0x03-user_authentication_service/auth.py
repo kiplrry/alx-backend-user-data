@@ -28,9 +28,8 @@ class Auth:
         #         password is None or not isinstance(password, str):
         #     return
         try:
-            user = self._db.find_user_by(email=email)
+            self._db.find_user_by(email=email)
             raise ValueError(f'User {email} already exists')
         except NoResultFound:
             hashed = _hash_password(password)
-            user = self._db.add_user(email, hashed)
-            return user
+            return self._db.add_user(email, hashed)
