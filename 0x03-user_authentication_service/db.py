@@ -35,31 +35,32 @@ class DB:
         """saves user to the db
         """
         if email is None or not isinstance(email, str)\
-                or hashed_password is None:
+                or hashed_password is None or\
+                    not  isinstance(hashed_password, str):
             return
         user = User(email=email, hashed_password=hashed_password)
         self._session.add(user)
         self._session.commit()
         return user
 
-    def find_user_by(self, **kwargs) -> User:
-        """takes in arbitrary keyword arguments and returns
-        the first row found in the users
-        table as filtered by the method's input argument"""
-        user = self._session.query(User).filter_by(**kwargs).first()
-        if user is None:
-            raise NoResultFound
-        return user
+    # def find_user_by(self, **kwargs) -> User:
+    #     """takes in arbitrary keyword arguments and returns
+    #     the first row found in the users
+    #     table as filtered by the method's input argument"""
+    #     user = self._session.query(User).filter_by(**kwargs).first()
+    #     if user is None:
+    #         raise NoResultFound
+    #     return user
 
-    def update_user(self, user_id: int, **kwargs):
-        """ updates a user """
-        if user_id is None or not isinstance(user_id, int):
-            return
-        user = self.find_user_by(id=user_id)
-        for k, v in kwargs.items():
-            if k not in ['hashed_password',
-                         'email', 'session_id',
-                         'reset_token']:
-                raise ValueError
-            setattr(user, k, v)
-        self._session.commit()
+    # def update_user(self, user_id: int, **kwargs):
+    #     """ updates a user """
+    #     if user_id is None or not isinstance(user_id, int):
+    #         return
+    #     user = self.find_user_by(id=user_id)
+    #     for k, v in kwargs.items():
+    #         if k not in ['hashed_password',
+    #                      'email', 'session_id',
+    #                      'reset_token']:
+    #             raise ValueError
+    #         setattr(user, k, v)
+    #     self._session.commit()
