@@ -36,5 +36,5 @@ class Auth:
             if user:
                 valid = bcrypt.checkpw(password.encode(), user.hashed_password)
                 return valid
-        except Exception:
-            return False
+        except NoResultFound:
+            return
