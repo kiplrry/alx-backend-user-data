@@ -12,13 +12,13 @@ app = Flask(__name__)
 def root():
     return jsonify({"message": "Bienvenue"})
 
-@app.post('/users', strict_slashes=False)
+
+@app.route('/users', methods=['POST'], strict_slashes=False)
 def users():
     """implements users route
     """
     email = request.form.get('email')
     password = request.form.get('password')
-    user = None
     try:
         AUTH.register_user(email, password)
         return jsonify({"email": email, "message": "user created"})
