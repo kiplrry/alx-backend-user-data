@@ -83,6 +83,8 @@ def update_password():
     email = request.form.get('email')
     reset_token = request.form.get('reset_token')
     password = request.form.get('new_password')
+    if not all([email, reset_token, password]):
+        abort(403)
     try:
         AUTH.update_password(reset_token, password)
     except Exception:
