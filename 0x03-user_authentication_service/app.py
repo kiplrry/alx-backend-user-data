@@ -27,7 +27,7 @@ def users():
 
 
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
-def login():
+def login() -> str:
     '''logs the user in'''
     email = request.form.get('email')
     password = request.form.get('password')
@@ -41,7 +41,7 @@ def login():
 
 
 @app.route('/sessions', methods=['DELETE'], strict_slashes=False)
-def logout() -> str:
+def logout():
     """logs user out
     """
     sess = request.cookies.get('session_id')
@@ -50,8 +50,7 @@ def logout() -> str:
         AUTH.destroy_session(user.id)
         return redirect('/')
     else:
-        abort(403)
-    
+        abort(403)    
 
 
 if __name__ == "__main__":
