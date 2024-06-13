@@ -82,7 +82,7 @@ def update_password():
     """
     email = request.form.get('email')
     reset_token = request.form.get('reset_token')
-    password = request.form.get('password')
+    password = request.form.get('new_password')
     try:
         AUTH.update_password(reset_token, password)
     except Exception:
