@@ -40,7 +40,7 @@ def login():
     return res
 
 
-@app.route('/sessions', methods=['POST'], strict_slashes=False)
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
 def logout():
     """logs user out"""
     sess = request.cookies.get('session_id')
