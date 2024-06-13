@@ -72,9 +72,9 @@ def get_reset_password_token():
     try:
         token = AUTH.get_reset_password_token(email=email)
         return jsonify({"email": "<user email>", "reset_token": token})
-    except ValueError:
+    except Exception:
         abort(403)
-    
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
