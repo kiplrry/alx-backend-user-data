@@ -75,7 +75,7 @@ class Auth:
         except NoResultFound:
             pass
 
-    def get_reset_password_token(self, email) -> str:
+    def get_reset_password_token(self, email: str) -> str:
         """get reset token
         """
         user = self._db.find_user_by(email=email)
