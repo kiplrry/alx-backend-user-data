@@ -71,7 +71,7 @@ def get_reset_password_token():
     email = request.form.get('email')
     try:
         token = AUTH.get_reset_password_token(email=email)
-        return jsonify({"email": "<user email>", "reset_token": token})
+        return jsonify({"email": email, "reset_token": token})
     except Exception:
         abort(403)
 
